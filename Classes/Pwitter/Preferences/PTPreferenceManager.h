@@ -56,5 +56,7 @@
 - (int)maxTweets;
 - (void)setHideDockIcon:(BOOL)aFlag;
 - (BOOL)hideDockIcon;
+- (BOOL)twitterHttps;
+- (NSString*)twitterBase;
 
 @end

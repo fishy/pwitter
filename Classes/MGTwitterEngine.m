@@ -11,6 +11,8 @@
 
 #import "NSData+Base64.h"
 
+#import "PTPreferenceManager.h"
+
 #define USE_LIBXML 0
 
 #if YAJL_AVAILABLE
@@ -104,12 +106,12 @@
         _clientVersion = [DEFAULT_CLIENT_VERSION retain];
         _clientURL = [DEFAULT_CLIENT_URL retain];
 		_clientSourceToken = [DEFAULT_CLIENT_TOKEN retain];
-		_APIDomain = [TWITTER_DOMAIN retain];
+		_APIDomain = [[PTPreferenceManager sharedSingleton] twitterBase];
 #if YAJL_AVAILABLE
 		_searchDomain = [TWITTER_SEARCH_DOMAIN retain];
 #endif
 
-        _secureConnection = YES;
+		_secureConnection = [[PTPreferenceManager sharedSingleton] twitterHttps];
 		_clearsCookies = NO;
 #if YAJL_AVAILABLE
 		_deliveryOptions = MGTwitterEngineDeliveryAllResultsOption;

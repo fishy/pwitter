@@ -39,6 +39,13 @@ static PTPreferenceManager *sharedSingleton;
 
 - (void)setupPreferences {
 	fPrefData = [NSUserDefaults standardUserDefaults];
+	NSDictionary *appDefaults;
+	appDefaults = [NSDictionary
+				   dictionaryWithObject:[NSNumber numberWithBool:YES] forKey:@"twitter_https"];
+	[fPrefData registerDefaults:appDefaults];
+	appDefaults = [NSDictionary
+				   dictionaryWithObject:@"twitter.com" forKey:@"twitter_base"];
+	[fPrefData registerDefaults:appDefaults];
 	if ([fPrefData integerForKey:@"time_interval"] == 0)
 		[fPrefData setInteger:2 forKey:@"time_interval"];
 	if ([fPrefData integerForKey:@"message_interval"] == 0)
@@ -243,6 +250,14 @@ static PTPreferenceManager *sharedSingleton;
 	BOOL lShouldHide = [[lPlistDict objectForKey:@"LSUIElement"] boolValue];
 	[lPlistDict release];
 	return lShouldHide;
+}
+
+- (BOOL)twitterHttps {
+	return [fPrefData boolForKey:@"twitter_https"];
+}
+
+- (NSString*)twitterBase {
+	return [fPrefData stringForKey:@"twitter_base"];
 }
 
 @end
